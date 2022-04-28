@@ -14,6 +14,7 @@ project("androidcpp")
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+#导入头文件
 include_directories(
         ${PROJECT_SOURCE_DIR}/include
         ${PROJECT_SOURCE_DIR}
@@ -21,6 +22,7 @@ include_directories(
 
 message("lucas-log:" ${PROJECT_SOURCE_DIR})
 
+#添加源文件
 add_library( # Sets the name of the library.
         androidcpp
 
@@ -28,6 +30,7 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
+        lib/mutex_sample.cpp
         native-lib.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a

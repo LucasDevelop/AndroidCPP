@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         binding.sampleText.setOnClickListener {
             JniThread().createJniThread()
         }
+        binding.vMutex.setOnClickListener {
+            JniThread().mutexSample()
+        }
     }
 
 

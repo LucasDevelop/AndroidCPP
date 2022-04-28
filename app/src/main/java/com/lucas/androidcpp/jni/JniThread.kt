@@ -6,5 +6,8 @@ class JniThread {
             System.loadLibrary("androidcpp")
         }
     }
+
     external fun createJniThread()
+
+    external fun mutexSample()
 }

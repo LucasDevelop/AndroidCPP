@@ -3,6 +3,8 @@
 #include <thread>
 #include "androidlog.h"
 #include <unistd.h>
+#include "mutex_sample.h"
+
 using namespace std;
 
 
@@ -43,4 +45,11 @@ Java_com_lucas_androidcpp_jni_JniThread_createJniThread(JNIEnv *env, jobject thi
     LOGD("------")
     t2.join();
     LOGD("线程执行完成,最终数值:%d",value)
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_lucas_androidcpp_jni_JniThread_mutexSample(JNIEnv *env, jobject thiz) {
+    MutexSample sample;
+    sample.test();
 }
