@@ -4,7 +4,7 @@
 # Sets the minimum version of CMake required to build the native library.
 
 cmake_minimum_required(VERSION 3.18.1)
-
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -Wall")
 # Declares and names the project.
 
 project("androidcpp")
@@ -12,25 +12,32 @@ project("androidcpp")
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
-# Gradle automatically packages shared libraries with your APK.
+# Gradle automatically packages SHARED libraries with your APK.
 
+set(ffmpeg-dir ${PROJECT_SOURCE_DIR}/ffmpeg)
 #导入头文件
 include_directories(
-        ${PROJECT_SOURCE_DIR}/include
         ${PROJECT_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/include
 )
 
-message("lucas-log:" ${PROJECT_SOURCE_DIR})
+#message("lucas-log:" ${PROJECT_SOURCE_DIR})
+#message("lucas-log:"  ${ffmpeg-dir}/include/libavcodec)
 
 #添加源文件
 add_library( # Sets the name of the library.
         androidcpp
 
-        # Sets the library as a shared library.
+        # Sets the library as a SHARED library.
         SHARED
 
         # Provides a relative path to your source file(s).
         lib/mutex_sample.cpp
+        lib/audio_pcm_sample.cpp
+        lib/AudioDecoder.cpp
+        lib/AudioPlayer.cpp
+        audio-pcm-player.cpp
+        native_audio_player.cpp
         native-lib.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -46,13 +53,114 @@ find_library( # Sets the name of the path variable.
         # you want CMake to locate.
         log)
 
+
+
+add_library(
+        avcodec
+        SHARED
+        IMPORTED
+)
+set_target_properties(
+        avcodec
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg-dir}/lib/libavcodec.so
+)
+
+add_library(
+        avdevice
+        SHARED
+        IMPORTED
+)
+set_target_properties(
+        avdevice
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg-dir}/lib/libavdevice.so
+)
+
+add_library(
+        avfilter
+        SHARED
+        IMPORTED
+)
+set_target_properties(
+        avfilter
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg-dir}/lib/libavfilter.so
+)
+
+add_library(
+        avformat
+        SHARED
+        IMPORTED
+)
+set_target_properties(
+        avformat
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg-dir}/lib/libavformat.so
+)
+
+add_library(
+        avutil
+        SHARED
+        IMPORTED
+)
+set_target_properties(
+        avutil
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg-dir}/lib/libavutil.so
+)
+
+add_library(
+        swresample
+        SHARED
+        IMPORTED
+)
+set_target_properties(
+        swresample
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg-dir}/lib/libswresample.so
+)
+
+add_library(
+        postproc
+        SHARED
+        IMPORTED
+)
+set_target_properties(
+        postproc
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg-dir}/lib/libpostproc.so
+)
+
+add_library(
+        swscale
+        SHARED
+        IMPORTED
+)
+set_target_properties(
+        swscale
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg-dir}/lib/libswscale.so
+)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
         androidcpp
-
+        OpenSLES #库的位置在ndk中
+        avcodec
+        postproc
+        swscale
+        swresample
+        avutil
+        avformat
+        avfilter
+        avdevice
+#        -ljnigraphics
+#        -landroid
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})

@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL
 Java_com_lucas_androidcpp_jni_JniThread_createJniThread(JNIEnv *env, jobject thiz) {
     //创建线程
 //    int count =100;
-//    LOGD("创建线程")
+    LOGD("创建线程")
 //    thread t = thread(callback2, count,"thread1");
 //    thread t2 = thread(callback2, count,"thread2");
 //    LOGD("创建完成")

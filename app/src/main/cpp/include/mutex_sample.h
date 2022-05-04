@@ -5,7 +5,7 @@
 #include "queue"
 #include "common_def.h"
 
-#endif
+
 using namespace std;
 class MutexSample;
 
@@ -33,4 +33,4 @@ public:
     condition_variable notFull;//商品满了
     void test();
 };
-
+#endif

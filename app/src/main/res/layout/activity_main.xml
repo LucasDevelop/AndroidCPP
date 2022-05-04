@@ -7,19 +7,24 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+<!--    <Button-->
+<!--        android:id="@+id/sample_text"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:text="多线程" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/v_mutex"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:text="生产者消费者模型" />-->
+
     <Button
-        android:id="@+id/sample_text"
+        android:id="@+id/v_audio_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="多线程" />
-
-    <Button
-        android:id="@+id/v_mutex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="生产者消费者模型" />
-
-
+        android:text="音频播放器" />
 </LinearLayout>
